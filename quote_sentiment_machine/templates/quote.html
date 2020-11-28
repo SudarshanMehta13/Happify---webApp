@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href='https://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.myLink {display: none}
+
+
+	.Merienda_One { font-family: "Merienda One"; font-size: 30px; font-style: normal; font-variant: normal; font-weight: 300; line-height: 26.4px; }
+
+div.quote {
+
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6.5rem;            /* Footer height */
+}
+
+</STYLE>
+
+
+
+<BODY  bgcolor="#fef4e2">
+
+	     <!-- Navigation Bar -->
+	<div class="w3-bar w3-border-bottom w3-xlarge w3-center"
+				style="width:100%; background-color:#406b86;">
+
+	     <img src='static/images/inspire-header-me.jpg' style="height:100px" />
+	</div>
+
+
+	<div id="quote" class="quote">
+		<div class="Merienda_One">
+			{{quote}}<BR><BR><BR>― {{author}}
+		</div>
+	</div>
+
+
+<footer class="w3-container w3-center w3-margin-bottom"  id="footer" >
+	<div class="w3-container w3-center">
+		<form id='myform' action="{{ url_for('quote_me') }}" method='GET'>
+			<button class="w3-button" type="submit" name='darker' id="darker" value='{{current_id}}'>
+				<img src='static/images/moon.png'  style="width:50px" />
+			</button>
+			<img src='static/images/hand.png' id='hand' style="width:100px" />
+			<button class="w3-button" name='brighter' id="brighter" type="submit" value='{{current_id}}'>
+				<img src='static/images/sun.png'  style="width:50px" />
+			</button>
+		</form>
+	</div>
+</footer>
+
+<SCRIPT type="text/javascript">
+
+    // credit: http://www.javascriptkit.com/javatutors/touchevents2.shtml
+    // https://codepen.io/ganmahmud/pen/RaoKZa
+    function swipedetect(el, callback){
+
+        var touchsurface = el,
+        swipedir,
+        startX,
+        startY,
+        distX,
+        distY,
+        threshold = 150, //required min distance traveled to be considered swipe
+        restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+        allowedTime = 300, // maximum time allowed to travel that distance
+        elapsedTime,
+        startTime,
+        handleswipe = callback || function(swipedir){}
+
+        touchsurface.addEventListener('touchstart', function(e){
+            var touchobj = e.changedTouches[0]
+            swipedir = 'none'
+            dist = 0
+            startX = touchobj.pageX
+            startY = touchobj.pageY
+            startTime = new Date().getTime() // record time when finger first makes contact with surface
+            e.preventDefault()
+        }, false)
+
+        touchsurface.addEventListener('touchmove', function(e){
+            e.preventDefault() // prevent scrolling when inside DIV
+        }, false)
+
+        touchsurface.addEventListener('touchend', function(e){
+            var touchobj = e.changedTouches[0]
+            distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+            distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+            elapsedTime = new Date().getTime() - startTime // get time elapsed
+            if (elapsedTime <= allowedTime){ // first condition for awipe met
+                if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+                    swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+                }
+                else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+                    swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+                }
+            }
+            handleswipe(swipedir)
+            e.preventDefault()
+        }, false)
+    }
+
+    //USAGE:
+    var el = document.getElementById('quote');
+    swipedetect(el, function(swipedir){
+        // swipedir contains either "none", "left", "right", "top", or "down"
+        if (swipedir == "right") {
+            document.getElementById("brighter").click();
+        }
+        else if  (swipedir == "left")  {
+            document.getElementById("darker").click();
+        }
+    });
+
+    var hand = document.getElementById('hand');
+    swipedetect(hand, function(swipedir){
+        // swipedir contains either "none", "left", "right", "top", or "down"
+        if (swipedir == "right") {
+            document.getElementById("brighter").click();
+        }
+        else if  (swipedir == "left")  {
+            document.getElementById("darker").click();
+        }
+    });
+
+</SCRIPT>
+
+</BODY>
+
+
+</HTML>
