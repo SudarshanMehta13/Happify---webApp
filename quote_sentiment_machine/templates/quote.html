@@ -41,8 +41,8 @@ div.quote {
 	<div class="w3-bar w3-border-bottom w3-xlarge w3-center"
 				style="width:100%; background-color:#406b86;">
 
-	     <img src='static/images/inspire-header-me.jpg' style="height:100px" />
-	</div>
+	     <img src='logo.png' style="height:100px" />
+	</div>	
 
 
 	<div id="quote" class="quote">
@@ -56,11 +56,11 @@ div.quote {
 	<div class="w3-container w3-center">
 		<form id='myform' action="{{ url_for('quote_me') }}" method='GET'>
 			<button class="w3-button" type="submit" name='darker' id="darker" value='{{current_id}}'>
-				<img src='static/images/moon.png'  style="width:50px" />
+				<img src='moon.png'  style="width:50px" />
 			</button>
-			<img src='static/images/hand.png' id='hand' style="width:100px" />
+			<img src='hand.png' id='hand' style="width:100px" />
 			<button class="w3-button" name='brighter' id="brighter" type="submit" value='{{current_id}}'>
-				<img src='static/images/sun.png'  style="width:50px" />
+				<img src='sun.png'  style="width:50px" />
 			</button>
 		</form>
 	</div>
